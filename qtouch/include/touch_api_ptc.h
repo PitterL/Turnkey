@@ -54,7 +54,9 @@ uint16_t get_scroller_position(uint16_t sensor_node);
 
 void touch_timer_handler(void);
 void touch_init(void);
+void touch_start(void);
 void touch_process(void);
+uint8_t	touch_sleep(void);
 
 #ifdef __cplusplus
 }

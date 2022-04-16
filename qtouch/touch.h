@@ -39,7 +39,14 @@ extern "C" {
  * Range: 1 to 255.
  * Default value: 20.
  */
-#define DEF_TOUCH_MEASUREMENT_PERIOD_MS 20
+#define DEF_TOUCH_MEASUREMENT_PERIOD_MS 10
+
+/* Defines the Measurement Time in milli seconds.
+ * Range: support[2, 4, 8, 16, 32, 64, 128, 256]
+ * Default value 64
+ * value 0 mean never measured in idle
+ */
+#define DEF_TOUCH_MEASUREMENT_IDLE_PERIOD_MS 64
 
 /* Defines the Type of sensor
  * Default value: NODE_MUTUAL.
@@ -133,7 +140,7 @@ extern "C" {
  * Range: 0-255
  * Default value: 20u = 4 seconds.
  */
-#define DEF_TCH_DRIFT_RATE 20
+#define DEF_TCH_DRIFT_RATE 10
 
 /* Rate at which sensor reference value is adjusted towards sensor signal value
  * when signal value is less than reference.
@@ -148,7 +155,7 @@ extern "C" {
  * Range: 0-255
  * Default value: 20u = 4 seconds.
  */
-#define DEF_DRIFT_HOLD_TIME 20
+#define DEF_DRIFT_HOLD_TIME 10
 
 /* Set mode for additional sensor measurements based on touch activity.
  * Range: REBURST_NONE / REBURST_UNRESOLVED / REBURST_ALL
@@ -160,7 +167,7 @@ extern "C" {
  * Range: 0-255
  * Default value: 0
  */
-#define DEF_MAX_ON_DURATION 0
+#define DEF_MAX_ON_DURATION 250 //200ms
 
 /**********************************************************/
 /********* Frequency Hop Module ****************/
@@ -204,24 +211,35 @@ extern "C" {
 #define QTM_AUTOSCAN_TRIGGER_PERIOD NODE_SCAN_64MS
 
 /* Waiting time (in millisecond) for the application to switch to low-power measurement after the last touch.
- * Range: 1 to 65535
- * Default value: 5000
+ * Range: 0 to 255, unit 200ms
+ * Default value: 0(never timeout)
  */
-#define DEF_TOUCH_TIMEOUT 5000
+#define DEF_TOUCH_ACTIVE_IDLE_TIMEOUT 0
 
 /* Defines drift measurement period
  * During low-power measurement, it is recommended to perform periodic active measurement to perform drifting.
  * This parameter defines the measurement interval to perform drifting.
- * Range: 1 to 65535 ( should be more than QTM_AUTOSCAN_TRIGGER_PERIOD)
- * Default value: 2000
+ * Range: 0 to 255 ( should be more than QTM_AUTOSCAN_TRIGGER_PERIOD) unit 200ms
+	0: never drift
+   Note: the maximum value will be limited by WDTDOG setting
  */
-#define DEF_TOUCH_DRIFT_PERIOD_MS 2000
+#define DEF_TOUCH_DRIFT_PERIOD_MS 20
+
+/* Defines overflow measage of the measurement
+ * During measurement, acquisition should be done before next measurement. If not, that means sampling interval is two fast or something wrong of the measurement
+ * Range: count that notice overflow
+	0 ~ 255
+ */
+#ifdef DEF_TOUCH_MEASUREMENT_OVERFLOW
+#define DEF_TOUCH_MEASUREMENT_OVERFLOW_THRESHOLD 2
+#define DEF_TOUCH_MEASUREMENT_OVERFLOW_FORCE_DONE 200
+#endif
 
 /**********************************************************/
 /***************** Communication - Data Streamer ******************/
 /**********************************************************/
 
-#define DEF_TOUCH_DATA_STREAMER_ENABLE 0u
+// #define DEF_TOUCH_DATA_STREAMER_ENABLE 0u
 
 #ifdef __cplusplus
 }
