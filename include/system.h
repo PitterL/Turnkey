@@ -51,8 +51,11 @@ void mcu_init(void)
 	 * disables all peripherals to save power. Driver shall enable
 	 * peripheral if used */
 
-	/* Set all pins to low power mode */
-
+	/* 
+        Set all pins to low power mode 
+        Pullup is about 1~2uA than output low
+    */
+    /*
 	for (uint8_t i = 0; i < 8; i++) {
 		*((uint8_t *)&PORTA + 0x10 + i) |= 1 << PORT_PULLUPEN_bp;
 	}
@@ -60,10 +63,18 @@ void mcu_init(void)
 	for (uint8_t i = 0; i < 8; i++) {
 		*((uint8_t *)&PORTB + 0x10 + i) |= 1 << PORT_PULLUPEN_bp;
 	}
-
+    
 	for (uint8_t i = 0; i < 8; i++) {
 		*((uint8_t *)&PORTC + 0x10 + i) |= 1 << PORT_PULLUPEN_bp;
 	}
+    */
+
+    *((uint8_t *)&PORTA) = 0xFF;  // Output 0
+    *((uint8_t *)&PORTA + 0x01) = 0;
+    *((uint8_t *)&PORTB) = 0xFF;  // Output 0
+    *((uint8_t *)&PORTB + 0x01) = 0;
+    *((uint8_t *)&PORTC) = 0xFF;  // Output 0
+    *((uint8_t *)&PORTC + 0x01) = 0;
 }
 #ifdef __cplusplus
 }

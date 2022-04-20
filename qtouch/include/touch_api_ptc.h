@@ -35,6 +35,7 @@ extern "C" {
 #include "qtm_acq_t81x_0x0007_api.h"
 #include "qtm_touch_key_0x0002_api.h"
 #include "qtm_freq_hop_0x0006_api.h"
+#include "qtm_noise_in_0x00a0_api.h"
 
 /*----------------------------------------------------------------------------
  *   prototypes

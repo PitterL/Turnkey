@@ -51,7 +51,7 @@ extern "C" {
 /* Defines the Type of sensor
  * Default value: NODE_MUTUAL.
  */
-#define DEF_SENSOR_TYPE NODE_MUTUAL
+#define DEF_SENSOR_TYPE NODE_SELFCAP_SHIELD
 
 /* Set sensor calibration mode for charge share delay ,Prescaler or series resistor.
  * Range: CAL_AUTO_TUNE_NONE / CAL_AUTO_TUNE_RSEL / CAL_AUTO_TUNE_PRSC / CAL_AUTO_TUNE_CSD
@@ -79,6 +79,16 @@ extern "C" {
  *     defines
  *----------------------------------------------------------------------------*/
 
+ /* Pin map */
+ /*
+    PA(6)  Y0  XY(2) BTN0
+    PA(7)  Y1  XY(3) BTN1
+
+    1 button:
+        Evsys sleep: 15uA
+        Soft sleep: 22uA
+ */
+
 /**********************************************************/
 /***************** Node Params   ******************/
 /**********************************************************/
@@ -87,16 +97,30 @@ extern "C" {
  * Range: 1 to 65535.
  * Default value: 1
  */
-#define DEF_NUM_CHANNELS (1)
+#define DEF_NUM_CHANNELS (2)
 
 /* Defines mutual cap node parameter setting
  * {X-line, Y-line, Charge Share Delay, NODE_RSEL_PRSC(series resistor, prescaler), NODE_G(Analog Gain , Digital Gain),
  * filter level}
  */
+/* Defines node parameter setting self cap
+ * {Shield line, Y-line, Charge Share Delay, NODE_RSEL_PRSC(series resistor, prescaler), NODE_G(Analog Gain , Digital
+ * Gain), filter level}
+ */
 #define NODE_0_PARAMS                                                                                                  \
-	{                                                                                                                  \
-		X(3), Y(0), 0, NODE_RSEL_PRSC(RSEL_VAL_0, PRSC_DIV_SEL_16), NODE_GAIN(GAIN_4, GAIN_4), FILTER_LEVEL_16         \
-	}
+  {                                                                                                                  \
+    X_NONE, Y(2), 0, NODE_RSEL_PRSC(RSEL_VAL_0, PRSC_DIV_SEL_4), NODE_GAIN(GAIN_1, GAIN_1), FILTER_LEVEL_16         \
+  }
+
+#define NODE_1_PARAMS                                                                                                  \
+    {                                                                                                                  \
+        X_NONE, Y(3), 0, NODE_RSEL_PRSC(RSEL_VAL_0, PRSC_DIV_SEL_4), NODE_GAIN(GAIN_1, GAIN_1), FILTER_LEVEL_16         \
+    }
+
+#define PTC_SEQ_NODE_CFG1  {  \
+  NODE_0_PARAMS,  \
+  NODE_1_PARAMS   \
+}
 
 /**********************************************************/
 /***************** Key Params   ******************/
@@ -105,15 +129,20 @@ extern "C" {
  * Range: 1 to 65535.
  * Default value: 1
  */
-#define DEF_NUM_SENSORS (1)
+#define DEF_NUM_SENSORS (DEF_NUM_CHANNELS)
 
 /* Defines Key Sensor setting
  * {Sensor Threshold, Sensor Hysterisis, Sensor AKS}
  */
 #define KEY_0_PARAMS                                                                                                   \
-	{                                                                                                                  \
-		130, HYST_25, NO_AKS_GROUP                                                                                     \
-	}
+  {                                                                                                                  \
+    130, HYST_25, NO_AKS_GROUP                                                                                     \
+  }
+
+#define QTLIB_KEY_CONFIGS_SET {  \
+  KEY_0_PARAMS,  \
+  KEY_0_PARAMS,  \
+}
 
 /* De-bounce counter for additional measurements to confirm touch detection
  * Range: 0 to 255.
@@ -183,6 +212,22 @@ extern "C" {
 #define DEF_MEDIAN_FILTER_FREQUENCIES FREQ_SEL_0, FREQ_SEL_1, FREQ_SEL_2
 
 /**********************************************************/
+/********* Noise in Module ****************/
+/**********************************************************/
+
+/* sets the Noise in sensor.
+ * Range: 0 to DEF_NUM_SENSORS.
+ * Default value: 0
+ */
+#define NUM_NOISE_SENSORS 1
+
+/* Which sensor to be considered as noise in pin */
+#define DEF_NOISE_IN_SENSORS 1
+
+/* Percentage of threshold reduction to as detect state */
+#define NOISE_HYST_PERCENT  HYST_25
+
+/**********************************************************/
 /******************* Low-power parameters *****************/
 /**********************************************************/
 /* Enable or disable low-power scan
@@ -195,7 +240,11 @@ extern "C" {
  * Range: 0 to (DEF_NUM_CHANNELS-1).
  * Default value: 0
  */
-#define QTM_AUTOSCAN_NODE 0
+#ifdef DEF_TOUCH_LOWPOWER_SOFT
+#define QTM_AUTOSCAN_NODE 0x3   /* sensor node mask */
+#else
+#define QTM_AUTOSCAN_NODE 0     /* sensor node */
+#endif
 
 /* Touch detection threshold for Low-power node.
  * Range: 10 to 255
@@ -214,13 +263,13 @@ extern "C" {
  * Range: 0 to 255, unit 200ms
  * Default value: 0(never timeout)
  */
-#define DEF_TOUCH_ACTIVE_IDLE_TIMEOUT 0
+#define DEF_TOUCH_ACTIVE_IDLE_TIMEOUT 20
 
 /* Defines drift measurement period
  * During low-power measurement, it is recommended to perform periodic active measurement to perform drifting.
  * This parameter defines the measurement interval to perform drifting.
  * Range: 0 to 255 ( should be more than QTM_AUTOSCAN_TRIGGER_PERIOD) unit 200ms
-	0: never drift
+  0: never drift
    Note: the maximum value will be limited by WDTDOG setting
  */
 #define DEF_TOUCH_DRIFT_PERIOD_MS 20
@@ -228,7 +277,7 @@ extern "C" {
 /* Defines overflow measage of the measurement
  * During measurement, acquisition should be done before next measurement. If not, that means sampling interval is two fast or something wrong of the measurement
  * Range: count that notice overflow
-	0 ~ 255
+  0 ~ 255
  */
 #ifdef DEF_TOUCH_MEASUREMENT_OVERFLOW
 #define DEF_TOUCH_MEASUREMENT_OVERFLOW_THRESHOLD 2

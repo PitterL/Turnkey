@@ -49,166 +49,7 @@ void system_init()
 {
 	mcu_init();
 
-	/* PORT setting on PA0 */
-
 	// Set pin direction to output
-
-	QTLP19_set_level(
-	    // <y> Initial level
-	    // <id> pad_initial_level
-	    // <false"> Low
-	    // <true"> High
-	    false);
-
-	QTLP19_set_dir(PORT_DIR_OUT);
-
-	/* PORT setting on PA1 */
-
-	// Set pin direction to output
-
-	QTLP20_set_level(
-	    // <y> Initial level
-	    // <id> pad_initial_level
-	    // <false"> Low
-	    // <true"> High
-	    false);
-
-	QTLP20_set_dir(PORT_DIR_OUT);
-
-	/* PORT setting on PA2 */
-
-	// Set pin direction to output
-
-	QTLP1_set_level(
-	    // <y> Initial level
-	    // <id> pad_initial_level
-	    // <false"> Low
-	    // <true"> High
-	    false);
-
-	QTLP1_set_dir(PORT_DIR_OUT);
-
-	/* PORT setting on PA3 */
-
-	// Set pin direction to output
-
-	QTLP2_set_level(
-	    // <y> Initial level
-	    // <id> pad_initial_level
-	    // <false"> Low
-	    // <true"> High
-	    false);
-
-	QTLP2_set_dir(PORT_DIR_OUT);
-
-	/* PORT setting on PA5 */
-
-	// Set pin direction to output
-
-	QTLP6_set_level(
-	    // <y> Initial level
-	    // <id> pad_initial_level
-	    // <false"> Low
-	    // <true"> High
-	    false);
-
-	QTLP6_set_dir(PORT_DIR_OUT);
-
-	/* PORT setting on PA6 */
-
-	// Set pin direction to output
-
-	QTLP7_set_level(
-	    // <y> Initial level
-	    // <id> pad_initial_level
-	    // <false"> Low
-	    // <true"> High
-	    false);
-
-	QTLP7_set_dir(PORT_DIR_OUT);
-
-	/* PORT setting on PB0 */
-
-	// Set pin direction to output
-
-	QTLP14_set_level(
-	    // <y> Initial level
-	    // <id> pad_initial_level
-	    // <false"> Low
-	    // <true"> High
-	    false);
-
-	QTLP14_set_dir(PORT_DIR_OUT);
-
-	/* PORT setting on PB1 */
-
-	// Set pin direction to output
-
-	QTLP13_set_level(
-	    // <y> Initial level
-	    // <id> pad_initial_level
-	    // <false"> Low
-	    // <true"> High
-	    false);
-
-	QTLP13_set_dir(PORT_DIR_OUT);
-
-	/* PORT setting on PB2 */
-
-	// Set pin direction to output
-
-	QTLP12_set_level(
-	    // <y> Initial level
-	    // <id> pad_initial_level
-	    // <false"> Low
-	    // <true"> High
-	    false);
-
-	QTLP12_set_dir(PORT_DIR_OUT);
-
-	/* PORT setting on PB3 */
-
-	// Set pin direction to output
-
-	QTLP11_set_level(
-	    // <y> Initial level
-	    // <id> pad_initial_level
-	    // <false"> Low
-	    // <true"> High
-	    false);
-
-	QTLP11_set_dir(PORT_DIR_OUT);
-
-	/* PORT setting on PB4 */
-
-	// Set pin direction to output
-
-	QTLP10_set_level(
-	    // <y> Initial level
-	    // <id> pad_initial_level
-	    // <false"> Low
-	    // <true"> High
-	    false);
-
-	QTLP10_set_dir(PORT_DIR_OUT);
-
-	/* PORT setting on PB5 */
-
-	// Set pin direction to output
-
-	QTLP9_set_level(
-	    // <y> Initial level
-	    // <id> pad_initial_level
-	    // <false"> Low
-	    // <true"> High
-	    false);
-
-	QTLP9_set_dir(PORT_DIR_OUT);
-
-	/* PORT setting on PC0 */
-
-	// Set pin direction to output
-
 	CHG_set_level(
 	    // <y> Initial level
 	    // <id> pad_initial_level
@@ -218,10 +59,7 @@ void system_init()
 
 	CHG_set_dir(PORT_DIR_OUT);
 
-	/* PORT setting on PC1 */
-
 	// Set pin direction to output
-
 	WD_set_level(
 	    // <y> Initial level
 	    // <id> pad_initial_level
@@ -234,28 +72,6 @@ void system_init()
 	/* PORT setting on PC2 */
 
 	// Set pin direction to output
-
-	QTLP17_set_level(
-	    // <y> Initial level
-	    // <id> pad_initial_level
-	    // <false"> Low
-	    // <true"> High
-	    false);
-
-	QTLP17_set_dir(PORT_DIR_OUT);
-
-	/* PORT setting on PC3 */
-
-	// Set pin direction to output
-
-	QTLP18_set_level(
-	    // <y> Initial level
-	    // <id> pad_initial_level
-	    // <false"> Low
-	    // <true"> High
-	    false);
-
-	QTLP18_set_dir(PORT_DIR_OUT);
 
 	CLKCTRL_init();
 

@@ -5,7 +5,7 @@
     <ProjectVersion>7.0</ProjectVersion>
     <ToolchainName>com.Atmel.AVRGCC8.C</ToolchainName>
     <ProjectGuid>dce6c7e3-ee26-4d79-826b-08594b9ad897</ProjectGuid>
-    <avrdevice>ATtiny816</avrdevice>
+    <avrdevice>ATtiny817</avrdevice>
     <avrdeviceseries>none</avrdeviceseries>
     <OutputType>Executable</OutputType>
     <Language>C</Language>
@@ -110,75 +110,117 @@
         <NonsecureFilesInfo />
       </AcmeProjectConfig>
     </AcmeProjectConfig>
+    <avrtool>com.atmel.avrdbg.tool.edbg</avrtool>
+    <avrtoolserialnumber>ATML2654041800000585</avrtoolserialnumber>
+    <avrdeviceexpectedsignature>0x1E9320</avrdeviceexpectedsignature>
+    <custom>
+      <ToolOptions>
+        <InterfaceProperties>
+        </InterfaceProperties>
+        <InterfaceName>
+        </InterfaceName>
+      </ToolOptions>
+      <ToolType>custom</ToolType>
+      <ToolNumber>
+      </ToolNumber>
+      <ToolName>Custom Programming Tool</ToolName>
+    </custom>
+    <avrtoolinterface>UPDI</avrtoolinterface>
+    <com_atmel_avrdbg_tool_simulator>
+      <ToolOptions xmlns="">
+        <InterfaceProperties>
+        </InterfaceProperties>
+        <InterfaceName>
+        </InterfaceName>
+      </ToolOptions>
+      <ToolType xmlns="">com.atmel.avrdbg.tool.simulator</ToolType>
+      <ToolNumber xmlns="">
+      </ToolNumber>
+      <ToolName xmlns="">Simulator</ToolName>
+    </com_atmel_avrdbg_tool_simulator>
+    <com_atmel_avrdbg_tool_edbg>
+      <ToolOptions>
+        <InterfaceProperties>
+          <UpdiClock>500000</UpdiClock>
+        </InterfaceProperties>
+        <InterfaceName>UPDI</InterfaceName>
+      </ToolOptions>
+      <ToolType>com.atmel.avrdbg.tool.edbg</ToolType>
+      <ToolNumber>ATML2654041800000585</ToolNumber>
+      <ToolName>EDBG</ToolName>
+    </com_atmel_avrdbg_tool_edbg>
+    <avrtoolinterfaceclock>500000</avrtoolinterfaceclock>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <ToolchainSettings>
       <AvrGcc>
-        <avrgcc.common.Device>-mmcu=attiny816 -B "%24(PackRepoDir)\Atmel\ATtiny_DFP\1.9.337\gcc\dev\attiny816"</avrgcc.common.Device>
-        <avrgcc.common.outputfiles.hex>True</avrgcc.common.outputfiles.hex>
-        <avrgcc.common.outputfiles.lss>True</avrgcc.common.outputfiles.lss>
-        <avrgcc.common.outputfiles.eep>True</avrgcc.common.outputfiles.eep>
-        <avrgcc.common.outputfiles.srec>True</avrgcc.common.outputfiles.srec>
-        <avrgcc.common.outputfiles.usersignatures>False</avrgcc.common.outputfiles.usersignatures>
-        <avrgcc.compiler.general.ChangeDefaultCharTypeUnsigned>True</avrgcc.compiler.general.ChangeDefaultCharTypeUnsigned>
-        <avrgcc.compiler.general.ChangeDefaultBitFieldUnsigned>True</avrgcc.compiler.general.ChangeDefaultBitFieldUnsigned>
-        <avrgcc.compiler.symbols.DefSymbols>
-          <ListValues>
-            <Value>NDEBUG</Value>
-          </ListValues>
-        </avrgcc.compiler.symbols.DefSymbols>
-        <avrgcc.compiler.directories.IncludePaths>
-          <ListValues>
-            <Value>../Config</Value>
-            <Value>../include</Value>
-            <Value>../utils</Value>
-            <Value>../utils/assembler</Value>
-            <Value>../</Value>
-            <Value>../documentation</Value>
-            <Value>../examples/include</Value>
-            <Value>../qtouch</Value>
-            <Value>../qtouch/include</Value>
-            <Value>%24(PackRepoDir)\Atmel\ATtiny_DFP\1.9.337\include\</Value>
-          </ListValues>
-        </avrgcc.compiler.directories.IncludePaths>
-        <avrgcc.compiler.optimization.level>Optimize for size (-Os)</avrgcc.compiler.optimization.level>
-        <avrgcc.compiler.optimization.PackStructureMembers>True</avrgcc.compiler.optimization.PackStructureMembers>
-        <avrgcc.compiler.optimization.AllocateBytesNeededForEnum>True</avrgcc.compiler.optimization.AllocateBytesNeededForEnum>
-        <avrgcc.compiler.warnings.AllWarnings>True</avrgcc.compiler.warnings.AllWarnings>
-        <avrgcc.linker.libraries.Libraries>
-          <ListValues>
-            <Value>libqtm_touch_key_t816_0x0002.a</Value>
-            <Value>libqtm_freq_hop_t816_0x0006.a</Value>
-            <Value>libqtm_acq_runtime_t816_0x0008.a</Value>
-            <Value>libm</Value>
-          </ListValues>
-        </avrgcc.linker.libraries.Libraries>
-        <avrgcc.linker.libraries.LibrarySearchPaths>
-          <ListValues>
-            <Value>../qtouch/lib/gcc</Value>
-          </ListValues>
-        </avrgcc.linker.libraries.LibrarySearchPaths>
-        <avrgcc.assembler.general.IncludePaths>
-          <ListValues>
-            <Value>../Config</Value>
-            <Value>../include</Value>
-            <Value>../utils</Value>
-            <Value>../utils/assembler</Value>
-            <Value>../</Value>
-            <Value>../documentation</Value>
-            <Value>../examples/include</Value>
-            <Value>../qtouch</Value>
-            <Value>../qtouch/include</Value>
-            <Value>%24(PackRepoDir)\Atmel\ATtiny_DFP\1.9.337\include\</Value>
-          </ListValues>
-        </avrgcc.assembler.general.IncludePaths>
-      </AvrGcc>
+  <avrgcc.common.Device>-mmcu=attiny817 -B "%24(PackRepoDir)\Atmel\ATtiny_DFP\1.9.337\gcc\dev\attiny817"</avrgcc.common.Device>
+  <avrgcc.common.outputfiles.hex>True</avrgcc.common.outputfiles.hex>
+  <avrgcc.common.outputfiles.lss>True</avrgcc.common.outputfiles.lss>
+  <avrgcc.common.outputfiles.eep>True</avrgcc.common.outputfiles.eep>
+  <avrgcc.common.outputfiles.srec>True</avrgcc.common.outputfiles.srec>
+  <avrgcc.common.outputfiles.usersignatures>False</avrgcc.common.outputfiles.usersignatures>
+  <avrgcc.compiler.general.ChangeDefaultCharTypeUnsigned>True</avrgcc.compiler.general.ChangeDefaultCharTypeUnsigned>
+  <avrgcc.compiler.general.ChangeDefaultBitFieldUnsigned>True</avrgcc.compiler.general.ChangeDefaultBitFieldUnsigned>
+  <avrgcc.compiler.symbols.DefSymbols>
+    <ListValues>
+      <Value>NDEBUG</Value>
+    </ListValues>
+  </avrgcc.compiler.symbols.DefSymbols>
+  <avrgcc.compiler.directories.IncludePaths>
+    <ListValues>
+      <Value>../Config</Value>
+      <Value>../include</Value>
+      <Value>../utils</Value>
+      <Value>../utils/assembler</Value>
+      <Value>../</Value>
+      <Value>../documentation</Value>
+      <Value>../examples/include</Value>
+      <Value>../qtouch</Value>
+      <Value>../qtouch/include</Value>
+      <Value>%24(PackRepoDir)\Atmel\ATtiny_DFP\1.9.337\include\</Value>
+    </ListValues>
+  </avrgcc.compiler.directories.IncludePaths>
+  <avrgcc.compiler.optimization.level>Optimize for size (-Os)</avrgcc.compiler.optimization.level>
+  <avrgcc.compiler.optimization.PackStructureMembers>True</avrgcc.compiler.optimization.PackStructureMembers>
+  <avrgcc.compiler.optimization.AllocateBytesNeededForEnum>True</avrgcc.compiler.optimization.AllocateBytesNeededForEnum>
+  <avrgcc.compiler.warnings.AllWarnings>True</avrgcc.compiler.warnings.AllWarnings>
+  <avrgcc.linker.libraries.Libraries>
+    <ListValues>
+      <Value>libqtm_touch_key_t816_0x0002.a</Value>
+      <Value>libqtm_freq_hop_t816_0x0006.a</Value>
+      <Value>libqtm_acq_runtime_t816_0x0008.a</Value>
+      <Value>libm</Value>
+      <Value>libqtm_qtm_noise_in_0x00a0.a</Value>
+    </ListValues>
+  </avrgcc.linker.libraries.Libraries>
+  <avrgcc.linker.libraries.LibrarySearchPaths>
+    <ListValues>
+      <Value>../qtouch/lib/gcc</Value>
+      <Value>D:\Users\a41450\atmel studio\ATtiny816-PowerButton-Project\ATtiny816-PowerButton-Project\qtouch\lib\gcc</Value>
+    </ListValues>
+  </avrgcc.linker.libraries.LibrarySearchPaths>
+  <avrgcc.assembler.general.IncludePaths>
+    <ListValues>
+      <Value>../Config</Value>
+      <Value>../include</Value>
+      <Value>../utils</Value>
+      <Value>../utils/assembler</Value>
+      <Value>../</Value>
+      <Value>../documentation</Value>
+      <Value>../examples/include</Value>
+      <Value>../qtouch</Value>
+      <Value>../qtouch/include</Value>
+      <Value>%24(PackRepoDir)\Atmel\ATtiny_DFP\1.9.337\include\</Value>
+    </ListValues>
+  </avrgcc.assembler.general.IncludePaths>
+</AvrGcc>
     </ToolchainSettings>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <ToolchainSettings>
       <AvrGcc>
-  <avrgcc.common.Device>-mmcu=attiny816 -B "%24(PackRepoDir)\Atmel\ATtiny_DFP\1.9.337\gcc\dev\attiny816"</avrgcc.common.Device>
+  <avrgcc.common.Device>-mmcu=attiny817 -B "%24(PackRepoDir)\Atmel\ATtiny_DFP\1.9.337\gcc\dev\attiny817"</avrgcc.common.Device>
   <avrgcc.common.outputfiles.hex>True</avrgcc.common.outputfiles.hex>
   <avrgcc.common.outputfiles.lss>True</avrgcc.common.outputfiles.lss>
   <avrgcc.common.outputfiles.eep>True</avrgcc.common.outputfiles.eep>
@@ -189,7 +231,10 @@
   <avrgcc.compiler.symbols.DefSymbols>
     <ListValues>
       <Value>DEBUG</Value>
+      <Value>EVK_3217_Xpro</Value>
       <Value>USE_WDT</Value>
+      <Value>DEF_TOUCH_MEASUREMENT_OVERFLOW</Value>
+      <Value>DEF_TOUCH_LOWPOWER_SOFT</Value>
     </ListValues>
   </avrgcc.compiler.symbols.DefSymbols>
   <avrgcc.compiler.directories.IncludePaths>
@@ -217,11 +262,13 @@
       <Value>libqtm_freq_hop_t816_0x0006.a</Value>
       <Value>libqtm_acq_runtime_t816_0x0008.a</Value>
       <Value>libm</Value>
+      <Value>libqtm_qtm_noise_in_0x00a0.a</Value>
     </ListValues>
   </avrgcc.linker.libraries.Libraries>
   <avrgcc.linker.libraries.LibrarySearchPaths>
     <ListValues>
       <Value>../qtouch/lib/gcc</Value>
+      <Value>D:\Users\a41450\atmel studio\ATtiny816-PowerButton-Project\ATtiny816-PowerButton-Project\qtouch\lib\gcc</Value>
     </ListValues>
   </avrgcc.linker.libraries.LibrarySearchPaths>
   <avrgcc.assembler.general.IncludePaths>
@@ -325,6 +372,9 @@
     <None Include="qtouch\lib\gcc\libqtm_freq_hop_t816_0x0006.a">
       <SubType>compile</SubType>
     </None>
+    <None Include="qtouch\lib\gcc\libqtm_qtm_noise_in_0x00a0.a">
+      <SubType>compile</SubType>
+    </None>
     <None Include="qtouch\lib\gcc\libqtm_touch_key_t816_0x0002.a">
       <SubType>compile</SubType>
     </None>
@@ -405,6 +455,9 @@
     <Compile Include="qtouch\include\qtm_freq_hop_0x0006_api.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="qtouch\include\qtm_noise_in_0x00a0_api.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="qtouch\include\qtm_touch_key_0x0002_api.h">
       <SubType>compile</SubType>
     </Compile>
@@ -412,6 +465,9 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="qtouch\license.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="qtouch\pack.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="qtouch\touch.c">

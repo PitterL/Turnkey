@@ -10,6 +10,7 @@
 extern volatile uint8_t measurement_done_touch;
 int main(void)
 {
+    uint8_t sensor_state = 0, new_state;
 	/* Initializes MCU, drivers and middleware */
 	atmel_start_init();
 
@@ -22,17 +23,22 @@ int main(void)
 	    touch_process();
 	    if (measurement_done_touch == 1) {
 		    measurement_done_touch = 0;
-    		if (get_sensor_state(0) & 0x80)	{
-        		CHG_set_level(false);
-    		}
-    		else{
-        		CHG_set_level(true);
+            new_state = get_sensor_state(0);
+            if (new_state != sensor_state) {
+    		    if (new_state & 0x80) {
+        		    CHG_set_level(false);
+    		    }
+    		    else{
+        		    CHG_set_level(true);
+    		    }
 
-                if (touch_sleep() == 0) {
-                    sleep_cpu();
-                }
-    		}
+                sensor_state = new_state;
+            }
 	    }
+
+        if (touch_sleep() == 0) {
+            sleep_cpu();
+        }
 
 #ifdef USE_WDT
         CLR_WDT();
