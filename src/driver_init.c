@@ -51,11 +51,11 @@ void system_init()
 
 	// Set pin direction to output
 	CHG_set_level(
-	    // <y> Initial level
+	    // <y> Initial level: idle High, active Low
 	    // <id> pad_initial_level
 	    // <false"> Low
 	    // <true"> High
-	    false);
+	    true);
 
 	CHG_set_dir(PORT_DIR_OUT);
 

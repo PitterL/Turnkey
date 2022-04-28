@@ -20,9 +20,11 @@ Copyright (c) 2021 Microchip. All rights reserved.
 ------------------------------------------------------------------------------
 ============================================================================*/
 /*
-  Change note:
-  [v20]
+	Change note:
+	[v20]
     20220415: initialize project
+    20220420: added `noise in` filter
+    20220422: `noise in` filter v0.2, added debounce counter
 */
 #ifndef TOUCH_C
 #define TOUCH_C
@@ -291,17 +293,32 @@ int16_t noise_buffer[NUM_NOISE_SENSORS];
 qtm_noise_in_config_t qtlib_noise_in_config1 = {
     DEF_NUM_SENSORS,
     NUM_NOISE_SENSORS,
-    NOISE_HYST_PERCENT,
+    NOISE_THRESHOLD,
+    DEF_NOISE_DEBOUNCE,
     &noise_sensor_selection[0],
 };
 
 /* Noise data */
 qtm_noise_in_data_t qtlib_noise_data_set1 = 
-  {0, &noise_buffer[0]};
+  {0, 0, &noise_buffer[0]};
 
 /* Container */
 qtm_noise_in_control_t qtlib_noise_set1
     = {&qtlib_noise_data_set1, &qtlib_noise_in_config1, &qtlib_key_data_set1[0], &qtlib_key_configs_set1[0]};
+
+#ifdef NOISE_IN_PURE_MODE
+// Mutual cap only
+static void gpio_noise_pin_set_od(bool od)
+{
+  if (od) {
+    // Set Hi-impedance 
+    PORTA_set_pin_dir(7, PORT_DIR_IN);
+  } else {
+    // Set low level
+    PORTA_set_pin_dir(7, PORT_DIR_OUT);
+  }
+}
+#endif
 
 static void touch_ptc_pin_config(void)
 {
@@ -315,6 +332,10 @@ static void touch_ptc_pin_config(void)
   PORTA_pin_set_isc(7, PORT_ISC_INPUT_DISABLE_gc);
   PORTA_set_pin_dir(7, PORT_DIR_IN);
   PORTA_pin_set_inverted(7, false);
+
+#ifdef NOISE_IN_PURE_MODE
+  gpio_noise_pin_set_od(false);
+#endif
 #else
 #error "Need config sensor pins!"
 #endif
@@ -734,7 +755,8 @@ static void touch_handle_measurement(void)
   // if (time_to_measure_touch_flag == 1u) {
   if (TEST(qlib_touch_state, QTLIB_STATE_TIME_TO_MEASURE)) {
     /* Clear the Measure request flag */
-    CLR(qlib_touch_state, QTLIB_STATE_TIME_TO_MEASURE);  
+    CLR(qlib_touch_state, QTLIB_STATE_TIME_TO_MEASURE);
+
     /* Do the acquisition */
     touch_ret = qtm_ptc_start_measurement_seq(&qtlib_acq_set1, qtm_measure_complete_callback);
     /* if the Acquisition request was successful then clear the request flag */
@@ -789,7 +811,7 @@ static void touch_handle_acquisition_process(void)
       touch_ret = qtm_noise_in(&qtlib_noise_set1);
       if (TOUCH_SUCCESS == touch_ret) {
         /* Returned with success: Check Noise state */
-        if (qtlib_noise_set1.qtm_noise_in_data->module_status & QTM_KEY_DETECT) {
+        if (qtlib_noise_set1.qtm_noise_in_data->module_status & QTM_NOISE_BLOCKED) {
           // Noise detected, clear time counter
           time_since_touch = 0u;
         } else {
@@ -1120,6 +1142,10 @@ static void touch_process_lowpower(void)
       SET(qlib_touch_state, QTLIB_STATE_SLEEP);
       /* notice t126 register the status changed */
       
+      /* set od to save power */
+#ifdef NOISE_IN_PURE_MODE
+      gpio_noise_pin_set_od(true);
+#endif
       /* Enable Event System */
       touch_enable_lowpower_measurement();
             
@@ -1177,6 +1203,11 @@ static void touch_cancel_autoscan(void)
   /* disable event system measurement */
   touch_disable_lowpower_measurement();
   
+  /* set driver to make noise stable */
+#ifdef NOISE_IN_PURE_MODE
+  gpio_noise_pin_set_od(false);
+#endif
+
   /* Cancel node auto scan */
   touch_autoscan_node_cancel();
 }

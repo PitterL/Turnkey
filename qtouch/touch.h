@@ -155,7 +155,7 @@ extern "C" {
  * Range: 0 to 255.
  * Default value: 5.
  */
-#define DEF_ANTI_TCH_DET_INT 5
+#define DEF_ANTI_TCH_DET_INT 20
 
 /* Threshold beyond with automatic sensor recalibration is initiated.
  * Range: RECAL_100/ RECAL_50 / RECAL_25 / RECAL_12_5 / RECAL_6_25 / MAX_RECAL
@@ -169,7 +169,7 @@ extern "C" {
  * Range: 0-255
  * Default value: 20u = 4 seconds.
  */
-#define DEF_TCH_DRIFT_RATE 10
+#define DEF_TCH_DRIFT_RATE 1
 
 /* Rate at which sensor reference value is adjusted towards sensor signal value
  * when signal value is less than reference.
@@ -177,7 +177,7 @@ extern "C" {
  * Range: 0-255
  * Default value: 5u = 1 second.
  */
-#define DEF_ANTI_TCH_DRIFT_RATE 5
+#define DEF_ANTI_TCH_DRIFT_RATE 2
 
 /* Time to restrict drift on all sensor when one or more sensors are activated.
  * Units: 200ms
@@ -190,7 +190,7 @@ extern "C" {
  * Range: REBURST_NONE / REBURST_UNRESOLVED / REBURST_ALL
  * Default value: REBURST_UNRESOLVED
  */
-#define DEF_REBURST_MODE REBURST_UNRESOLVED
+#define DEF_REBURST_MODE REBURST_ALL
 
 /* Sensor maximum ON duration upon touch.
  * Range: 0-255
@@ -209,7 +209,7 @@ extern "C" {
 #define NUM_FREQ_STEPS 3
 
 /* PTC Sampling Delay Selection - 0 to 15 PTC CLK cycles */
-#define DEF_MEDIAN_FILTER_FREQUENCIES FREQ_SEL_0, FREQ_SEL_1, FREQ_SEL_2
+#define DEF_MEDIAN_FILTER_FREQUENCIES FREQ_SEL_0, FREQ_SEL_7, FREQ_SEL_15
 
 /**********************************************************/
 /********* Noise in Module ****************/
@@ -224,8 +224,14 @@ extern "C" {
 /* Which sensor to be considered as noise in pin */
 #define DEF_NOISE_IN_SENSORS 1
 
+/* De-bounce counter for additional measurements to confirm noise detection
+ * Range: 0 to 255.
+ * Default value: 4.
+ */
+#define DEF_NOISE_DEBOUNCE 10
+
 /* Percentage of threshold reduction to as detect state */
-#define NOISE_HYST_PERCENT  HYST_25
+#define NOISE_THRESHOLD  50
 
 /**********************************************************/
 /******************* Low-power parameters *****************/
@@ -272,7 +278,7 @@ extern "C" {
   0: never drift
    Note: the maximum value will be limited by WDTDOG setting
  */
-#define DEF_TOUCH_DRIFT_PERIOD_MS 20
+#define DEF_TOUCH_DRIFT_PERIOD_MS 10
 
 /* Defines overflow measage of the measurement
  * During measurement, acquisition should be done before next measurement. If not, that means sampling interval is two fast or something wrong of the measurement

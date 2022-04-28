@@ -234,7 +234,7 @@
       <Value>EVK_3217_Xpro</Value>
       <Value>USE_WDT</Value>
       <Value>DEF_TOUCH_MEASUREMENT_OVERFLOW</Value>
-      <Value>DEF_TOUCH_LOWPOWER_SOFT</Value>
+      <Value>xDEF_TOUCH_LOWPOWER_SOFT</Value>
     </ListValues>
   </avrgcc.compiler.symbols.DefSymbols>
   <avrgcc.compiler.directories.IncludePaths>

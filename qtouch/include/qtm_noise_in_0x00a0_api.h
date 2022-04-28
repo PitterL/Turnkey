@@ -9,25 +9,31 @@
 #include <stdint.h>
 #include "qtm_common_components_api.h"
 #include "qtm_touch_key_0x0002_api.h"
-  
+
+/* Noise status dlags */
+#define QTM_NOISE_DETECT 0x01u
+#define QTM_NOISE_BLOCKED 0x80u
+
 /*----------------------------------------------------------------------------
  *     Structure Declarations
  *----------------------------------------------------------------------------*/
 
 /* Noise In Module */
 /* Configuration */
-typedef struct 
+typedef struct
 {
-  uint16_t num_key_sensors;             /* Number of sensors */
-  uint8_t num_noises;             /* Number of noise sensors */
-  uint8_t channel_hysteresis;    /* Percentage of threshold reduction to as detect state */
-  uint8_t *noise_channel_select;        /* noisy channel nodes used to detect the noise */
+    uint16_t num_key_sensors;             /* Number of sensors */
+    uint8_t num_noises;             /* Number of noise sensors */
+    uint8_t noise_threshld;    /* noise threshold as detect state */
+    uint8_t noise_debounce;        /* noise blocked debounce cycle if detect */
+    uint8_t *noise_channel_select;        /* noisy channel nodes used to detect the noise */
 }qtm_noise_in_config_t;
 
 /* Status data */
 typedef struct 
 {
-  uint8_t module_status;        /* Obligatory status: `QTM_KEY_DETECT` */  
+  uint8_t module_status;        /* Obligatory status: `QTM_NOISE_BLOCKED` */ 
+  uint8_t state_counter;        /* State counter */
   int16_t *noise_buffer;        /* Current noise delta value of the buffer */
 }qtm_noise_in_data_t;
 
