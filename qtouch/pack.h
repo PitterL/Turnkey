@@ -19,7 +19,8 @@ The below definition is used for cupdi(v1.6) package tool.
 	Warning: Support '//' comment mark, but not support '/ * * /' comment mark inside the definition
 */
 /* Firmware version*/
-#define PROJECT_CODE 0x56323011	/*V20, 1.1*/
+// Format: 2 bytes ascii code followed with 4 nibbles number: ASC-ASC-N-N-N-N
+#define PROJECT_CODE 0x20562011	/*V20, build 1.1*/
 
 /* Fuse content */
 // BOD level 2(2.6v Sampled 1Khz at Sleep, Enabled at Active), OSC 16Mhz, NVM protect after POR, EEPROM erased, WDT 4096ms
