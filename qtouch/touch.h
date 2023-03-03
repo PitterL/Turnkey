@@ -212,28 +212,6 @@ extern "C" {
 #define DEF_MEDIAN_FILTER_FREQUENCIES FREQ_SEL_0, FREQ_SEL_7, FREQ_SEL_15
 
 /**********************************************************/
-/********* Noise in Module ****************/
-/**********************************************************/
-
-/* sets the Noise in sensor.
- * Range: 0 to DEF_NUM_SENSORS.
- * Default value: 0
- */
-#define NUM_NOISE_SENSORS 1
-
-/* Which sensor to be considered as noise in pin */
-#define DEF_NOISE_IN_SENSORS 1
-
-/* De-bounce counter for additional measurements to confirm noise detection
- * Range: 0 to 255.
- * Default value: 4.
- */
-#define DEF_NOISE_DEBOUNCE 10
-
-/* Percentage of threshold reduction to as detect state */
-#define NOISE_THRESHOLD  50
-
-/**********************************************************/
 /******************* Low-power parameters *****************/
 /**********************************************************/
 /* Enable or disable low-power scan

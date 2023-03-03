@@ -20,7 +20,7 @@ The below definition is used for cupdi(v1.6) package tool.
 */
 /* Firmware version*/
 // Format: 2 bytes ascii code followed with 4 nibbles number: ASC-ASC-N-N-N-N
-#define PROJECT_CODE 0x20562011	/*V20, build 1.1*/
+#define PROJECT_CODE 0x20562010	/*V20, build 1.0*/
 
 /* Fuse content */
 // BOD level 2(2.6v Sampled 1Khz at Sleep, Enabled at Active), OSC 16Mhz, NVM protect after POR, EEPROM erased, WDT 4096ms
